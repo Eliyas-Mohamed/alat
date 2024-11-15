@@ -65,6 +65,7 @@ function TopnavBar() {
           <IconButton>
             <img src={horn} style={navBarImageStyle} alt="menu" />
           </IconButton>
+
           <IconButton>
             <img src={cog} style={navBarImageStyle} alt="menu" />
           </IconButton>

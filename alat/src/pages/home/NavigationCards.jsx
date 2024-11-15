@@ -100,6 +100,8 @@ function NavigationCards() {
                   minHeight: "280px",
                   borderRadius: "10px",
                   padding: "25px",
+                  display: "flex",
+                  alignItems: "center",
                 }}
               >
                 <Box maxWidth={"260px"}>

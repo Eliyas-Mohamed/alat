@@ -11,7 +11,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { IconButton, Stack } from "@mui/material";
+import { IconButton, Stack, Tooltip } from "@mui/material";
 import Home from "../home";
 
 import homeIcon from "../../assets/nav-icon/home.png";
@@ -29,7 +29,14 @@ import userGroup from "../../assets/nav-icon/user-group.png";
 
 const drawerWidth = 112;
 
-const navIcons = [homeIcon, tv, globe, userCircle, clipBoard, userGroup];
+const navIcons = [
+  { icon: homeIcon, tooltip: "Home" },
+  { icon: tv, tooltip: "Workspace" },
+  { icon: globe, tooltip: "World" },
+  { icon: userCircle, tooltip: "User" },
+  { icon: clipBoard, tooltip: "Boards" },
+  { icon: userGroup, tooltip: "Group" },
+];
 
 export default function MasterLayout() {
   const [active, setActive] = useState(0);
@@ -63,29 +70,30 @@ export default function MasterLayout() {
           <Stack alignItems={"center"} gap={2.5}>
             <img src={logo} style={{ width: "64px", height: "56px" }} />
 
-            {navIcons.map((icon, index) => (
-              <IconButton
-                key={index}
-                sx={{
-                  borderRadius: "10px",
-                  padding: "20px",
-                  backgroundColor: `${
-                    index === active ? "rgba(9, 218, 197, .3)" : "#ffffff"
-                  }`,
-                  "&:focus": {
-                    outline: "unset",
-                  },
-                  "&:hover": {
-                    backgroundColor: "rgba(9, 218, 197, .2)",
-                    transform: "scale(1.1)",
-                    transition: "transform 330ms ease-in-out",
-                    boxShadow: "2px 3px 2px #ededed",
-                  },
-                }}
-                onClick={() => setActive(index)}
-              >
-                <img src={icon} style={{ width: "24px", height: "24px" }} />
-              </IconButton>
+            {navIcons.map(({ icon, tooltip }, index) => (
+              <Tooltip title={tooltip} key={index}>
+                <IconButton
+                  sx={{
+                    borderRadius: "10px",
+                    padding: "20px",
+                    backgroundColor: `${
+                      index === active ? "rgba(9, 218, 197, .3)" : "#ffffff"
+                    }`,
+                    "&:focus": {
+                      outline: "unset",
+                    },
+                    "&:hover": {
+                      backgroundColor: "rgba(9, 218, 197, .2)",
+                      transform: "scale(1.1)",
+                      transition: "transform 330ms ease-in-out",
+                      boxShadow: "2px 3px 2px #ededed",
+                    },
+                  }}
+                  onClick={() => setActive(index)}
+                >
+                  <img src={icon} style={{ width: "24px", height: "24px" }} />
+                </IconButton>
+              </Tooltip>
             ))}
           </Stack>
 
