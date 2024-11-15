@@ -1,12 +1,26 @@
 import React from "react";
-import { Grid, Paper, Typography, Stack, Box } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Stack,
+  Box,
+  Link,
+  styled,
+  Button,
+} from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
+import Grid from "@mui/material/Grid2";
 
 import newsImage1 from "../../assets/newandannoucements/img1.png";
+import newsImage2 from "../../assets/newandannoucements/img2.png";
+import newsImage3 from "../../assets/newandannoucements/img3.png";
 
 import supportImage1 from "../../assets/support/img1.png";
 import supportImage2 from "../../assets/support/img2.png";
@@ -15,132 +29,248 @@ import supportImage4 from "../../assets/support/img4.png";
 import arrow from "../../assets/support/arrow-right.png";
 
 import "./bottom.scss";
+
+const newsAndAnnouncements = [
+  {
+    header: "Lorem ipsum dolor sit amet, orum.",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor...",
+    linkText: "Read more",
+    image: newsImage1,
+  },
+  {
+    header: "Lorem ipsum dolor sit amet, orum.",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor...",
+    linkText: "Read more",
+    image: newsImage2,
+  },
+  {
+    header: "Lorem ipsum dolor sit amet, orum.",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor...",
+    linkText: "Read more",
+    image: newsImage3,
+  },
+];
+const ratings = [
+  {
+    ratingName: "Excellent",
+    votes: 8,
+  },
+  {
+    ratingName: "Very Good",
+    votes: 4,
+  },
+  {
+    ratingName: "Good",
+    votes: 2,
+  },
+  {
+    ratingName: "Fair",
+    votes: 1,
+  },
+  {
+    ratingName: "Needs Improvement",
+    votes: 0,
+  },
+];
+const supportAndHelp = [
+  {
+    image: supportImage1,
+    text: "IT Support",
+  },
+  {
+    image: supportImage2,
+    text: "IT Infrastructure",
+  },
+  {
+    image: supportImage3,
+    text: "Cyber Security",
+  },
+  {
+    image: supportImage4,
+    text: "Remote Support",
+  },
+];
+const BorderLinearProgress = styled(LinearProgress)(() => ({
+  height: 10,
+  borderRadius: 5,
+  width: "100px",
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: "#ededed",
+  },
+}));
 function BottomSection() {
   return (
-    <Grid
-      container
-      spacing={{ xs: 2, md: 3 }}
-      columns={{ xs: 4, sm: 8, md: 12 }}
-    >
-      <Grid item size={{ xs: 2, sm: 4, md: 4 }}>
-        <Paper>
+    <Grid container spacing={2}>
+      <Grid
+        size={{ xs: 6, md: 4 }}
+        bgcolor={"#ffffff"}
+        borderRadius={"15px"}
+        padding={2}
+        className={"card-shadow"}
+      >
+        <Paper elevation={0}>
           <Typography variant="h3" color="primary">
             News and anouncements
           </Typography>
-          <Stack direction="row" spacing={2}>
-            <img className="news-img" src={newsImage1} alt="./" />
-            <Box>
-              <Typography variant="h6" color="primary">
-                Lorem ipsum dolor sit amet, orum.
-              </Typography>
-              <Typography variant="body2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor...
-              </Typography>
-            </Box>
+          <Stack direction="column" spacing={2}>
+            {newsAndAnnouncements.map(
+              ({ header, description, linkText, image }, index) => (
+                <Stack
+                  key={index}
+                  direction="row"
+                  spacing={2}
+                  sx={{ maxWidth: "416px" }}
+                >
+                  <img
+                    className="news-img"
+                    src={image}
+                    alt="./"
+                    style={{ borderRadius: "10px", objectFit: "cover" }}
+                  />
+                  <Box>
+                    <Typography variant="h6" color="tertiary">
+                      {header}
+                    </Typography>
+                    <Typography variant="body3" as={"p"}>
+                      {description}
+                    </Typography>
+                    <Link href="#" color="primary" variant="subtitle2">
+                      {linkText}
+                    </Link>
+                  </Box>
+                </Stack>
+              )
+            )}
           </Stack>
-          <Grid container columns={12}>
-            <Grid item size={3}></Grid>
-            <Grid item size={9}></Grid>
-          </Grid>
         </Paper>
       </Grid>
-      <Grid item size={{ xs: 2, sm: 4, md: 4 }}>
-        <Paper>
+      <Grid
+        size={{ xs: 6, md: 4 }}
+        bgcolor={"#ffffff"}
+        borderRadius={"15px"}
+        padding={2}
+        className={"card-shadow"}
+      >
+        <Paper elevation={0}>
           <Typography variant="h3" color="primary">
             Alat Hub rating
           </Typography>
           <Typography variant="h4" color="primary">
             How do you rate Alat Hub?
           </Typography>
-          <FormControl>
+
+          <FormControl fullWidth>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="excellent"
+              defaultValue="Excellent"
               name="radio-buttons-group"
             >
-              <FormControlLabel
-                value="excellent"
-                control={<Radio />}
-                label="Excellent"
-              />
-              <FormControlLabel
-                value="very good"
-                control={<Radio />}
-                label="very good"
-              />
-              <FormControlLabel value="good" control={<Radio />} label="good" />
-              <FormControlLabel value="fair" control={<Radio />} label="fair" />
-              <FormControlLabel
-                value="need improvement"
-                control={<Radio />}
-                label="need improvement"
-              />
+              {ratings.map(({ ratingName, votes }, index) => (
+                <Stack
+                  key={index}
+                  direction={"row"}
+                  justifyContent={"space-between"}
+                  alignItems={"center"}
+                >
+                  <FormControlLabel
+                    value={ratingName}
+                    control={<Radio variant={"primary"} />}
+                    label={
+                      <Typography variant={"body4"} color="#000000">
+                        {ratingName}
+                      </Typography>
+                    }
+                  />
+
+                  <Stack direction={"row"} alignItems={"center"}>
+                    <BorderLinearProgress
+                      variant="determinate"
+                      value={votes * 10}
+                      sx={{ marginRight: "10px" }}
+                    />
+                    <Typography variant={"subtitle3"} color={"tertiary"}>
+                      {votes} Votes
+                    </Typography>
+                  </Stack>
+                </Stack>
+              ))}
             </RadioGroup>
           </FormControl>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            marginTop={"10px"}
+          >
+            <Button
+              title="Vote"
+              variant="contained"
+              sx={{
+                textTransform: "capitalize",
+                fontFamily: "Karbon-semibold",
+                fontSize: "16px",
+                fontWeight: "500",
+                width: "80px",
+                borderRadius: "10px",
+              }}
+              size="large"
+            >
+              Vote
+            </Button>
+            <Link href="#" color="primary" variant="subtitle2">
+              15 Votes
+            </Link>
+          </Stack>
         </Paper>
       </Grid>
-      <Grid item size={{ xs: 2, sm: 4, md: 4 }}>
-        <Paper>
+      <Grid
+        size={{ xs: 6, md: 4 }}
+        bgcolor={"#ffffff"}
+        borderRadius={"15px"}
+        padding={2}
+        className={"card-shadow"}
+      >
+        <Paper elevation={0}>
           <Typography variant="h3" color="primary">
             Support &#38; Help Desk
           </Typography>
-          <Stack direction="row" spacing={2}>
-            <img
-              src={supportImage1}
-              alt="support"
-              style={{ width: "24px", height: "24px" }}
-            />
+          <Stack direction={"column"} spacing={2}>
+            {supportAndHelp.map(({ image, text }, index) => (
+              <Stack
+                key={index}
+                direction={"row"}
+                justifyContent={"space-between"}
+                spacing={3}
+                alignItems={"center"}
+                border={"1px solid"}
+                borderColor={"#ededed"}
+                borderRadius={"10px"}
+              >
+                <Stack direction={"row"} padding={2} spacing={3}>
+                  <Box
+                    sx={{
+                      backgroundImage: `url(${image})`,
+                      backgroundRepeat: "no-repeat",
+                      width: "24px",
+                      height: "24px",
+                    }}
+                  ></Box>
 
-            <Typography variant="h5" color="primary">
-              IT Support
-            </Typography>
-            <img
-              src={arrow}
-              alt="support"
-              style={{ width: "24px", height: "24px" }}
-            />
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <img
-              src={supportImage2}
-              alt="support"
-              style={{ width: "24px", height: "24px" }}
-            />
+                  <Typography variant="h5" marginLeft={"15px"} color="primary">
+                    {text}
+                  </Typography>
+                </Stack>
 
-            <Typography variant="h5" color="primary">
-              IT Support
-            </Typography>
-
-            <img
-              src={arrow}
-              alt="support"
-              style={{ width: "24px", height: "24px" }}
-            />
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <img
-              src={supportImage3}
-              alt="support"
-              style={{ width: "24px", height: "24px" }}
-            />
-            <Box>
-              <Typography variant="h5" color="primary">
-                IT Support
-              </Typography>
-            </Box>
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <img
-              src={supportImage4}
-              alt="support"
-              style={{ width: "24px", height: "24px" }}
-            />
-            <Box>
-              <Typography variant="h5" color="primary">
-                IT Support
-              </Typography>
-            </Box>
+                <img
+                  src={arrow}
+                  alt="support"
+                  style={{ width: "24px", height: "24px", marginRight: "15px" }}
+                />
+              </Stack>
+            ))}
           </Stack>
         </Paper>
       </Grid>

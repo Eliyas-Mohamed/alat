@@ -1,3 +1,28 @@
 #root {
   width: 100%;
 }
+
+@font-face {
+  font-family: Karbon;
+  src: url(./assets/fonts/Karbon-Regular.ttf);
+}
+@font-face {
+  font-family: Karbon-bold;
+  src: url(./assets/fonts/Karbon-Bold.ttf);
+}
+@font-face {
+  font-family: Karbon-medium;
+  src: url(./assets/fonts/Karbon-Medium.ttf);
+}
+@font-face {
+  font-family: Karbon-semibold;
+  src: url(./assets/fonts/Karbon-Semibold.ttf);
+}
+@font-face {
+  font-family: Karbon-light;
+  src: url(./assets/fonts/Karbon-Light.ttf);
+}
+
+.card-shadow {
+  box-shadow: 1px 1px 5px 0px rgba(26, 26, 26, 0.1);
+}
