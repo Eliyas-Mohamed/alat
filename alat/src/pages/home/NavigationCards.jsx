@@ -7,7 +7,7 @@ import image2 from "../../assets/cards/image2.png";
 import image3 from "../../assets/cards/image3.png";
 import image4 from "../../assets/cards/image4.png";
 import image5 from "../../assets/cards/image5.png";
-
+import image6 from "../../assets/cards/image6.png";
 import arrow from "../../assets/arrow.png";
 
 const navigationCards = [
@@ -15,12 +15,28 @@ const navigationCards = [
     header: "New Joiners",
     description:
       "Plan your meetings in advance with the help of upcoming holidays",
-    image: image5,
-    bgColor: "#05283A",
+    image: image6,
+    bgColor: "#80898c",
     textColor: "secondary",
   },
   {
     header: "New Joiners",
+    description:
+      "Plan your meetings in advance with the help of upcoming holidays",
+    image: image2,
+    bgColor: "unset",
+    textColor: "#05283a",
+  },
+  {
+    header: "New Joiners",
+    description:
+      "Plan your meetings in advance with the help of upcoming holidays",
+    image: image3,
+    bgColor: "#09DAC5",
+    textColor: "#ffffff",
+  },
+  {
+    header: "Holidays",
     description:
       "Plan your meetings in advance with the help of upcoming holidays",
     image: image1,
@@ -33,23 +49,7 @@ const navigationCards = [
       "Plan your meetings in advance with the help of upcoming holidays",
     image: image4,
     bgColor: "#09DAC5",
-    textColor: "primary",
-  },
-  {
-    header: "Holidays",
-    description:
-      "Plan your meetings in advance with the help of upcoming holidays",
-    image: image3,
-    bgColor: "unset",
-    textColor: "secondary",
-  },
-  {
-    header: "New Joiners",
-    description:
-      "Plan your meetings in advance with the help of upcoming holidays",
-    image: image4,
-    bgColor: "#09DAC5",
-    textColor: "primary",
+    textColor: "#05283A",
   },
   {
     header: "New Joiners",

@@ -12,9 +12,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 import notepad from "../../assets/creative-hub/notepad.png";
-
 import image from "../../assets/creative-hub/image.png";
 import slideshow from "../../assets/creative-hub/slideshow.png";
 import email from "../../assets/creative-hub/email.png";
@@ -22,40 +22,58 @@ import background from "../../assets/creative-hub/background.png";
 import doc from "../../assets/creative-hub/doc.png";
 import font from "../../assets/creative-hub/font.png";
 import fontbox from "../../assets/creative-hub/font-box.png";
-import worldmap from "../../assets/location/worldmap.png";
 
-import "./creativehub.scss";
+import notepadDark from "../../assets/creative-hub/dark/notepad.png";
+import imageDark from "../../assets/creative-hub/dark/image.png";
+import slideshowDark from "../../assets/creative-hub/dark/slideshow.png";
+import emailDark from "../../assets/creative-hub/dark/email.png";
+import backgroundDark from "../../assets/creative-hub/dark/background.png";
+import docDark from "../../assets/creative-hub/dark/doc.png";
+import fontDark from "../../assets/creative-hub/dark/font.png";
+import fontboxDark from "../../assets/creative-hub/dark/font-box.png";
+
+import worldmap from "../../assets/location/worldmap.png";
+import worldmapDark from "../../assets/location/dark/worldmap.png";
+
 const creativeHub = [
   {
     image: notepad,
+    imageDark: notepadDark,
     text: "Alat Brand Guidelines",
   },
   {
     image: background,
+    imageDark: backgroundDark,
     text: "Teams Background",
   },
   {
     image: slideshow,
+    imageDark: slideshowDark,
     text: "PowerPoint Templates",
   },
   {
     image: email,
+    imageDark: emailDark,
     text: "Email Signatures",
   },
   {
     image: image,
+    imageDark: imageDark,
     text: "Alat Images",
   },
   {
     image: fontbox,
+    imageDark: fontboxDark,
     text: "Alat Logos",
   },
   {
     image: font,
+    imageDark: fontDark,
     text: "Alat Fonts",
   },
   {
     image: doc,
+    imageDark: docDark,
     text: "Word Templates",
   },
 ];
@@ -85,12 +103,16 @@ const location = [
 ];
 
 export default function CreativeHub() {
+  const {
+    palette: { mode },
+  } = useTheme();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid
           size={{ xs: 6, md: 8 }}
-          bgcolor={"#ffffff"}
+          bgcolor={"background.main"}
           borderRadius={"15px"}
           padding={2}
           display={"flex"}
@@ -107,7 +129,11 @@ export default function CreativeHub() {
                 <Card
                   elevation={0}
                   sx={{
-                    backgroundColor: "rgba(2, 81, 140, .1)",
+                    backgroundColor: `${
+                      mode === "light"
+                        ? "rgba(2, 81, 140, .1)"
+                        : "background.light"
+                    }`,
                     borderRadius: "15px",
                   }}
                 >
@@ -115,11 +141,11 @@ export default function CreativeHub() {
                     <Stack direction={"row"} spacing={2} alignItems={"center"}>
                       <Box
                         padding={"8px"}
-                        bgcolor={"#fff"}
+                        bgcolor={"background.main"}
                         borderRadius={"10px"}
                       >
                         <img
-                          src={image}
+                          src={mode === "light" ? image : imageDark}
                           alt="creative-image"
                           style={{
                             width: "40px",
@@ -149,7 +175,7 @@ export default function CreativeHub() {
         </Grid>
         <Grid
           size={{ xs: 6, md: 4 }}
-          bgcolor={"#ffffff"}
+          bgcolor={"background.main"}
           borderRadius={"15px"}
           className={"card-shadow"}
         >
@@ -166,6 +192,24 @@ export default function CreativeHub() {
             disablePadding
             sx={{
               borderRadius: "15px",
+              ".demo-wrap": {
+                content: '" "',
+                display: "block",
+                position: "absolute",
+                left: 0,
+                top: 0,
+                width: "100%",
+                height: "100%",
+                opacity: 0.1,
+                backgroundImage: `url(${
+                  mode === "light" ? worldmap : worldmapDark
+                })`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "50% 0",
+                backgroundSize: "cover",
+                borderBottomLeftRadius: "15px",
+                borderBottomRightRadius: "15px",
+              },
             }}
           >
             <div className="demo-wrap"></div>
@@ -177,8 +221,12 @@ export default function CreativeHub() {
                     justifyContent: "space-between",
                     backgroundColor: `${
                       index % 2 === 0
-                        ? "rgba(255,255,255,.1)"
-                        : "rgba(2, 81, 140, .1)"
+                        ? mode === "light"
+                          ? "rgba(255,255,255,.1)"
+                          : "#2a2a2a"
+                        : mode === "light"
+                        ? "rgba(2,81,140,.1)"
+                        : "rgba(248, 248, 248, .1)"
                     }`,
                     borderBottomLeftRadius: `${
                       index === location.length - 1 ? "15px" : "0px"
@@ -229,7 +277,13 @@ export default function CreativeHub() {
                   </Typography>
                 </ListItem>
                 {index % 2 === 0 ? (
-                  <Divider sx={{ height: "1px", backgroundColor: "#bcbcbc" }} />
+                  <Divider
+                    sx={{
+                      height: "1px",
+                      backgroundColor:
+                        mode === "light" ? "#bcbcbc" : "rgba(248,248,248.1)",
+                    }}
+                  />
                 ) : null}
               </>
             ))}

@@ -6,6 +6,7 @@ import {
   IconButton,
   InputBase,
   Paper,
+  useTheme,
 } from "@mui/material";
 import menu from "../assets/topbanner/menu.png";
 import horn from "../assets/topbanner/bullhorn-variant-outline.png";
@@ -20,10 +21,13 @@ const navBarImageStyle = {
 };
 
 function TopnavBar() {
+  const {
+    palette: { mode },
+  } = useTheme();
   return (
     <Stack
       direction={"row"}
-      bgcolor={"#00141E"}
+      bgcolor={mode === "light" ? "#00141E" : "#000000"}
       padding={"5px 16px"}
       justifyContent={"space-between"}
       alignItems={"center"}
@@ -41,7 +45,13 @@ function TopnavBar() {
         </Stack>
       </Box>
       <Box minWidth={"400px"}>
-        <Paper sx={{ borderRadius: "10px", padding: "0 10px" }}>
+        <Paper
+          sx={{
+            borderRadius: "10px",
+            padding: "0 10px",
+            backgroundColor: "#ffffff",
+          }}
+        >
           <IconButton>
             <img
               src={search}
@@ -52,9 +62,11 @@ function TopnavBar() {
           <InputBase
             placeholder="Search across sites"
             sx={{
+              color: "#80898c",
               "&::placeholder": {
                 fontSize: "16px",
                 fontFamily: "Karbon",
+                color: "#80898c",
               },
             }}
           />

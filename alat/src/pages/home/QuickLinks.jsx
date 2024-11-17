@@ -1,10 +1,18 @@
-import { Box, Stack, Typography, Link, IconButton } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Typography,
+  Link,
+  IconButton,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import Slider from "react-slick";
 
-import leftArrow from "../../assets/left.png";
-import rightArrow from "../../assets/right.png";
-
+import leftArrow from "../../assets/quick-links/left.png";
+import rightArrow from "../../assets/quick-links/right.png";
+import leftArrowDark from "../../assets/quick-links/dark/left.png";
+import rightArrowDark from "../../assets/quick-links/dark/right.png";
 import "./quicklinks.scss";
 
 const sliderSettings = {
@@ -30,28 +38,41 @@ const quickLinks = [
   "HR Onboarding",
 ];
 function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
+  const { className, style, onClick, lightRightArrow, darkRightArrow, mode } =
+    props;
   return (
     <div className={className} style={{ ...style }} onClick={onClick}>
-      <img src={rightArrow} />
+      <img src={mode === "light" ? lightRightArrow : darkRightArrow} />
     </div>
   );
 }
 
 function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
+  const {
+    className,
+    style,
+    onClick,
+    lightLeftArrow,
+    darkLeftArrow,
+    lightImage,
+    darkImage,
+    mode,
+  } = props;
   return (
     <div className={className} style={{ ...style }} onClick={onClick}>
-      <img src={leftArrow} />
+      <img src={mode === "light" ? lightLeftArrow : darkLeftArrow} />
     </div>
   );
 }
 
 function QuickLinks() {
+  const {
+    palette: { mode },
+  } = useTheme();
   return (
     <Stack
       direction={"row"}
-      bgcolor={"#ffffff"}
+      bgcolor={"background.main"}
       borderRadius={"15px"}
       padding={2}
       justifyContent={"space-around"}
@@ -62,7 +83,23 @@ function QuickLinks() {
         Quick Links
       </Typography>
       <Box width={"75vw"}>
-        <Slider {...sliderSettings}>
+        <Slider
+          {...sliderSettings}
+          nextArrow={
+            <SampleNextArrow
+              mode={mode}
+              lightRightArrow={rightArrow}
+              darkRightArrow={rightArrowDark}
+            />
+          }
+          prevArrow={
+            <SamplePrevArrow
+              mode={mode}
+              lightLeftArrow={leftArrow}
+              darkLeftArrow={leftArrowDark}
+            />
+          }
+        >
           {quickLinks.map((link, index) => (
             <IconButton
               key={index}
@@ -76,7 +113,7 @@ function QuickLinks() {
               <Box
                 borderRadius={"15px"}
                 padding={"0 10px"}
-                bgcolor={"#ededed"}
+                bgcolor={"background.light"}
                 margin={"0 10px"}
                 display={"inline-block"}
               >

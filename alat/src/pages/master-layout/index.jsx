@@ -11,39 +11,47 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { IconButton, Stack, Tooltip } from "@mui/material";
+import { IconButton, Stack, Tooltip, useTheme } from "@mui/material";
 import Home from "../home";
 
 import homeIcon from "../../assets/nav-icon/home.png";
-
 import tv from "../../assets/nav-icon/tv.png";
 import globe from "../../assets/nav-icon/globe-alt.png";
-
 import light from "../../assets/nav-icon/light.png";
 import userCircle from "../../assets/nav-icon/user-circle.png";
-
 import logo from "../../assets/nav-icon/Logo.png";
 import clipBoard from "../../assets/nav-icon/clipboard-document-list.png";
-
 import userGroup from "../../assets/nav-icon/user-group.png";
+
+import homeIconDark from "../../assets/nav-icon/dark/home.png";
+import tvDark from "../../assets/nav-icon/dark/tv.png";
+import globeDark from "../../assets/nav-icon/dark/globe-alt.png";
+import dark from "../../assets/nav-icon/dark/dark.png";
+import userCircleDark from "../../assets/nav-icon/dark/user-circle.png";
+import logoDark from "../../assets/nav-icon/dark/logo.png";
+import clipBoardDark from "../../assets/nav-icon/dark/clipbaord-document.png";
+import userGroupDark from "../../assets/nav-icon/dark/user-group.png";
 
 const drawerWidth = 112;
 
 const navIcons = [
-  { icon: homeIcon, tooltip: "Home" },
-  { icon: tv, tooltip: "Workspace" },
-  { icon: globe, tooltip: "World" },
-  { icon: userCircle, tooltip: "User" },
-  { icon: clipBoard, tooltip: "Boards" },
-  { icon: userGroup, tooltip: "Group" },
+  { lightIcon: homeIcon, darkIcon: homeIconDark, tooltip: "Home" },
+  { lightIcon: tv, darkIcon: tvDark, tooltip: "Workspace" },
+  { lightIcon: globe, darkIcon: globeDark, tooltip: "World" },
+  { lightIcon: userCircle, darkIcon: userCircleDark, tooltip: "User" },
+  { lightIcon: clipBoard, darkIcon: clipBoardDark, tooltip: "Boards" },
+  { lightIcon: userGroup, darkIcon: userGroupDark, tooltip: "Boards" },
 ];
 
-export default function MasterLayout() {
+export default function MasterLayout({ setTheme }) {
+  const {
+    palette: { mode },
+  } = useTheme();
   const [active, setActive] = useState(0);
 
   return (
     <>
-      <Box>
+      <Box position={"relative"}>
         {/* <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
@@ -54,30 +62,39 @@ export default function MasterLayout() {
             flexShrink: 0,
             position: "fixed",
             left: 0,
+            height: "93%",
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               boxSizing: "border-box",
               alignItems: "center",
               justifyContent: "space-between",
-              top: "88px",
+              top: 0,
               border: "unset",
-              height: "90%",
+              height: "100%",
+              backgroundColor: "background.main",
+              position: "absolute",
+              padding: "10px 0",
             },
           }}
           variant="permanent"
           anchor="left"
         >
           <Stack alignItems={"center"} gap={2.5}>
-            <img src={logo} style={{ width: "64px", height: "56px" }} />
+            <img
+              src={mode === "light" ? logo : logoDark}
+              style={{ width: "64px", height: "56px" }}
+            />
 
-            {navIcons.map(({ icon, tooltip }, index) => (
+            {navIcons.map(({ lightIcon, darkIcon, tooltip }, index) => (
               <Tooltip title={tooltip} key={index}>
                 <IconButton
                   sx={{
                     borderRadius: "10px",
                     padding: "20px",
                     backgroundColor: `${
-                      index === active ? "rgba(9, 218, 197, .3)" : "#ffffff"
+                      index === active
+                        ? "rgba(9, 218, 197, .3)"
+                        : "background.main"
                     }`,
                     "&:focus": {
                       outline: "unset",
@@ -86,12 +103,19 @@ export default function MasterLayout() {
                       backgroundColor: "rgba(9, 218, 197, .2)",
                       transform: "scale(1.1)",
                       transition: "transform 330ms ease-in-out",
-                      boxShadow: "2px 3px 2px #ededed",
+                      boxShadow: `${
+                        mode === "light"
+                          ? `2px 3px 2px #ededed`
+                          : `2px 3px 2px #1a1a1a`
+                      }`,
                     },
                   }}
                   onClick={() => setActive(index)}
                 >
-                  <img src={icon} style={{ width: "24px", height: "24px" }} />
+                  <img
+                    src={mode === "light" ? lightIcon : darkIcon}
+                    style={{ width: "24px", height: "24px" }}
+                  />
                 </IconButton>
               </Tooltip>
             ))}
@@ -109,14 +133,18 @@ export default function MasterLayout() {
                 backgroundColor: "rgba(9, 218, 197, .3)",
               },
             }}
+            onClick={() => setTheme()}
           >
-            <img src={light} style={{ width: "24px", height: "24px" }} />
+            <img
+              src={mode === "light" ? light : dark}
+              style={{ width: "24px", height: "24px" }}
+            />
           </IconButton>
         </Drawer>
         <Box
           component="main"
           marginLeft={`${drawerWidth}px`}
-          sx={{ bgcolor: "#ededed", p: 3 }}
+          sx={{ bgcolor: "background.light", p: 3 }}
         >
           <Home />
         </Box>
