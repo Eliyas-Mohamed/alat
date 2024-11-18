@@ -117,7 +117,7 @@ function BottomSection() {
   return (
     <Grid container spacing={2}>
       <Grid
-        size={{ xs: 6, md: 4 }}
+        size={{ sm: 12, md: 6, lg: 4 }}
         bgcolor={"background.main"}
         borderRadius={"15px"}
         padding={2}
@@ -160,7 +160,7 @@ function BottomSection() {
         </Paper>
       </Grid>
       <Grid
-        size={{ xs: 6, md: 4 }}
+        size={{ sm: 12, md: 6, lg: 4 }}
         bgcolor={"background.main"}
         borderRadius={"15px"}
         padding={2}
@@ -250,11 +250,12 @@ function BottomSection() {
         </Paper>
       </Grid>
       <Grid
-        size={{ xs: 6, md: 4 }}
+        size={{ sm: 12, md: 12, lg: 4 }}
         bgcolor={"background.main"}
         borderRadius={"15px"}
         padding={2}
         className={"card-shadow"}
+        width={"100%"}
       >
         <Paper elevation={0} sx={{ backgroundColor: "background.main" }}>
           <Typography variant="h3" color="primary">

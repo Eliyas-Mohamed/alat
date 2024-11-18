@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import Slider from "react-slick";
+import { useMediaQuery } from "react-responsive";
 
 import leftArrow from "../../assets/quick-links/left.png";
 import rightArrow from "../../assets/quick-links/right.png";
@@ -25,6 +26,23 @@ const sliderSettings = {
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
   variableWidth: true,
+  responsive: [
+    {
+      breakpoint: 900,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
 };
 
 const quickLinks = [
@@ -69,9 +87,12 @@ function QuickLinks() {
   const {
     palette: { mode },
   } = useTheme();
+  const isMobile = useMediaQuery({
+    query: "(max-width: 767px)",
+  });
   return (
     <Stack
-      direction={"row"}
+      direction={isMobile ? "column" : "row"}
       bgcolor={"background.main"}
       borderRadius={"15px"}
       padding={2}
@@ -79,7 +100,7 @@ function QuickLinks() {
       alignItems={"center"}
       className={"card-shadow"}
     >
-      <Typography variant="h4" mb={0} color="primary">
+      <Typography variant="h4" mb={isMobile ? 3 : 0} color="primary">
         Quick Links
       </Typography>
       <Box width={"75vw"}>

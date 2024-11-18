@@ -74,7 +74,7 @@ function NavigationCards() {
             <Grid
               key={index}
               component={"div"}
-              size={{ xs: 2, sm: 4, md: 3, lg: 4 }}
+              size={{ xs: 12, sm: 12, md: 4 }}
               className={"card-shadow"}
               sx={{
                 backgroundImage: `url(${image})`,

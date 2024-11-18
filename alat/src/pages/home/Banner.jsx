@@ -1,6 +1,7 @@
 import { Box, Typography, Link, Stack } from "@mui/material";
 import React from "react";
 import Slider from "react-slick";
+import { useMediaQuery } from "react-responsive";
 
 import bannerImage from "../../assets/banner-image.png";
 import bannerLogo from "../../assets/banner-logo.png";
@@ -47,6 +48,14 @@ const banner2Content = [
     image: banner2img5,
   },
 ];
+const banner2ContentResponsive = [
+  {
+    header: "DELIVER",
+    description:
+      "Ensuring that every action, decision, and behaviour have a positive influence on the organisation and its stakeholders",
+    image: banner2img1,
+  },
+];
 const sliderSettings = {
   dots: true,
   infinite: true,
@@ -59,6 +68,12 @@ const sliderSettings = {
   fade: true,
 };
 function BannerSlider() {
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+  const isMobile = useMediaQuery({
+    query: "(max-width: 767px)",
+  });
   return (
     <Box>
       <Slider {...sliderSettings}>
@@ -69,7 +84,7 @@ function BannerSlider() {
             padding: "20px",
             borderRadius: "15px",
             lineHeight: "21.2px",
-            backgroundImage: `url(${bannerImage})`,
+            backgroundImage: `${isDesktop ? `url(${bannerImage})` : "unset"}`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "right",
@@ -121,21 +136,39 @@ function BannerSlider() {
                 TOMORROW <br /> MADE BETTER
               </Typography>
             </Stack>
-            {banner2Content.map(({ header, description, image }, index) => (
-              <Stack key={index} direction={"column"} maxWidth={"210px"}>
-                <img
-                  src={image}
-                  style={{ width: "50px", height: "50px" }}
-                  alt="logo"
-                />
-                <Typography variant="h2" color="#09dac5">
-                  {header}
-                </Typography>
-                <Typography variant="body3" color="secondary">
-                  {description}
-                </Typography>
-              </Stack>
-            ))}
+            {isMobile
+              ? banner2ContentResponsive.map(
+                  ({ header, description, image }, index) => (
+                    <Stack key={index} direction={"column"} maxWidth={"210px"}>
+                      <img
+                        src={image}
+                        style={{ width: "50px", height: "50px" }}
+                        alt="logo"
+                      />
+                      <Typography variant="h2" color="#09dac5">
+                        {header}
+                      </Typography>
+                      <Typography variant="body3" color="secondary">
+                        {description}
+                      </Typography>
+                    </Stack>
+                  )
+                )
+              : banner2Content.map(({ header, description, image }, index) => (
+                  <Stack key={index} direction={"column"} maxWidth={"210px"}>
+                    <img
+                      src={image}
+                      style={{ width: "50px", height: "50px" }}
+                      alt="logo"
+                    />
+                    <Typography variant="h2" color="#09dac5">
+                      {header}
+                    </Typography>
+                    <Typography variant="body3" color="secondary">
+                      {description}
+                    </Typography>
+                  </Stack>
+                ))}
           </Stack>
         </Box>
       </Slider>

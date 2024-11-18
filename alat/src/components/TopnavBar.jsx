@@ -8,6 +8,7 @@ import {
   Paper,
   useTheme,
 } from "@mui/material";
+import { useMediaQuery } from "react-responsive";
 import menu from "../assets/topbanner/menu.png";
 import horn from "../assets/topbanner/bullhorn-variant-outline.png";
 import help from "../assets/topbanner/help-circle-outline.png";
@@ -21,12 +22,16 @@ const navBarImageStyle = {
 };
 
 function TopnavBar() {
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
   const {
     palette: { mode },
   } = useTheme();
   return (
     <Stack
-      direction={"row"}
+      direction={isDesktop ? "row" : "column"}
+      gap={isDesktop ? 0 : 2}
       bgcolor={mode === "light" ? "#00141E" : "#000000"}
       padding={"5px 16px"}
       justifyContent={"space-between"}

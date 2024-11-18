@@ -111,7 +111,7 @@ export default function CreativeHub() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid
-          size={{ xs: 6, md: 8 }}
+          size={{ md: 12, lg: 8 }}
           bgcolor={"background.main"}
           borderRadius={"15px"}
           padding={2}
@@ -174,10 +174,11 @@ export default function CreativeHub() {
           </Grid>
         </Grid>
         <Grid
-          size={{ xs: 6, md: 4 }}
+          size={{ md: 12, lg: 4 }}
           bgcolor={"background.main"}
           borderRadius={"15px"}
           className={"card-shadow"}
+          width={"100%"}
         >
           <Typography
             variant="h3"
