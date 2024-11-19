@@ -2,6 +2,7 @@ import { Box, Typography, Link, Stack } from "@mui/material";
 import React from "react";
 import Slider from "react-slick";
 import { useMediaQuery } from "react-responsive";
+import Grid from "@mui/material/Grid2";
 
 import bannerImage from "../../assets/banner-image.png";
 import bannerLogo from "../../assets/banner-logo.png";
@@ -63,7 +64,7 @@ const sliderSettings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   arrows: false,
-  autoplay: true,
+  autoplay: false,
   autoplaySpeed: 2000,
   fade: true,
 };
@@ -81,38 +82,49 @@ function BannerSlider() {
           sx={{
             backgroundColor: "#02518C",
             textAlign: "left",
-            padding: "20px",
             borderRadius: "15px",
             lineHeight: "21.2px",
-            backgroundImage: `${isDesktop ? `url(${bannerImage})` : "unset"}`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "right",
             minHeight: "240px",
           }}
         >
-          <Box sx={{ maxWidth: "650px" }}>
-            <img
-              className="banner-logo-img"
-              src={bannerLogo}
-              alt="banner-logo"
-            />
-            <Typography variant="h1" color="secondary">
-              Message from our CEO
-            </Typography>
-            <Typography
-              variant="body1"
-              color="secondary"
-              sx={{ marginBottom: "10px" }}
-            >
-              Welcome to Alat hub. We're excited to have you here. Discover how
-              our innovative solutions help you solve a problem or achieve your
-              goals.
-            </Typography>
-            <Link href="#" color="secondary" variant="subtitle1">
-              Read more
-            </Link>
-          </Box>
+          <Grid container alignItems={"center"}>
+            <Grid size={{ md: 12, lg: 8 }} padding={"20px"}>
+              <Box sx={{ maxWidth: "650px" }} height={"100%"}>
+                <img
+                  className="banner-logo-img"
+                  src={bannerLogo}
+                  alt="banner-logo"
+                />
+                <Typography variant="h1" color="secondary">
+                  Message from our CEO
+                </Typography>
+                <Typography
+                  variant="body1"
+                  color="secondary"
+                  sx={{ marginBottom: "10px" }}
+                >
+                  Welcome to Alat hub. We're excited to have you here. Discover
+                  how our innovative solutions help you solve a problem or
+                  achieve your goals.
+                </Typography>
+                <Link href="#" color="secondary" variant="subtitle1">
+                  Read more
+                </Link>
+              </Box>
+            </Grid>
+            <Grid size={{ md: 12, lg: 4 }}>
+              <Box position={"relative"}>
+                <img
+                  src={bannerImage}
+                  style={{
+                    width: "319px",
+                    height: "240px",
+                    objectFit: "cover",
+                  }}
+                />
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
         <Box
           sx={{
@@ -125,7 +137,7 @@ function BannerSlider() {
         >
           <div className="banner-overlay"></div>
           <Stack
-            direction="row"
+            direction={isMobile ? "column" : "row"}
             position={"relative"}
             justifyContent={"space-between"}
             minHeight={"205px"}
@@ -136,39 +148,28 @@ function BannerSlider() {
                 TOMORROW <br /> MADE BETTER
               </Typography>
             </Stack>
-            {isMobile
-              ? banner2ContentResponsive.map(
-                  ({ header, description, image }, index) => (
-                    <Stack key={index} direction={"column"} maxWidth={"210px"}>
-                      <img
-                        src={image}
-                        style={{ width: "50px", height: "50px" }}
-                        alt="logo"
-                      />
-                      <Typography variant="h2" color="#09dac5">
-                        {header}
-                      </Typography>
-                      <Typography variant="body3" color="secondary">
-                        {description}
-                      </Typography>
-                    </Stack>
-                  )
-                )
-              : banner2Content.map(({ header, description, image }, index) => (
-                  <Stack key={index} direction={"column"} maxWidth={"210px"}>
-                    <img
-                      src={image}
-                      style={{ width: "50px", height: "50px" }}
-                      alt="logo"
-                    />
-                    <Typography variant="h2" color="#09dac5">
-                      {header}
-                    </Typography>
-                    <Typography variant="body3" color="secondary">
-                      {description}
-                    </Typography>
-                  </Stack>
-                ))}
+            <Stack direction={"row"} overflow={isMobile ? "scroll" : "unset"}>
+              {banner2Content.map(({ header, description, image }, index) => (
+                <Stack
+                  key={index}
+                  direction={"column"}
+                  padding={1}
+                  maxWidth={"210px"}
+                >
+                  <img
+                    src={image}
+                    style={{ width: "50px", height: "50px" }}
+                    alt="logo"
+                  />
+                  <Typography variant="h2" color="#09dac5">
+                    {header}
+                  </Typography>
+                  <Typography variant="body3" color="secondary">
+                    {description}
+                  </Typography>
+                </Stack>
+              ))}
+            </Stack>
           </Stack>
         </Box>
       </Slider>
