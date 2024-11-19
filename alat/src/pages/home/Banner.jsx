@@ -71,6 +71,24 @@ const sliderSettings = {
 };
 
 function BannerSlider() {
+  const { secondary, primary, tertiary } = {
+    primary: {
+      main: "#05283a",
+    },
+    secondary: {
+      main: "#ffffff",
+    },
+    tertiary: {
+      main: "#02518C",
+    },
+    background: {
+      main: "#ffffff",
+      light: "#ededed",
+    },
+    white: {
+      main: "#ffffff",
+    },
+  };
   const typography = {
     h1: {
       fontSize: 32,
@@ -178,12 +196,16 @@ function BannerSlider() {
                     src={bannerLogo}
                     alt="banner-logo"
                   />
-                  <Typography variant="h1" sx={typography.h1} color="secondary">
+                  <Typography
+                    variant="h1"
+                    sx={typography.h1}
+                    color={secondary.main}
+                  >
                     Message from our CEO
                   </Typography>
                   <Typography
                     variant="body1"
-                    color="secondary"
+                    color={secondary.main}
                     sx={typography.body1}
                   >
                     Welcome to Alat hub. We're excited to have you here.
@@ -192,7 +214,7 @@ function BannerSlider() {
                   </Typography>
                   <Link
                     href="#"
-                    color="secondary"
+                    color={secondary.main}
                     variant="subtitle1"
                     sx={typography.subtitle1}
                   >
@@ -234,7 +256,7 @@ function BannerSlider() {
                 <img src={banner2Logo} style={{ width: "114px" }} alt="logo" />
                 <Typography
                   variant="h3"
-                  color="secondary"
+                  color={secondary.main}
                   sx={{ ...typography.h3, mb: 0 }}
                 >
                   TOMORROW <br /> MADE BETTER
@@ -262,7 +284,7 @@ function BannerSlider() {
                     </Typography>
                     <Typography
                       variant="body3"
-                      color="secondary"
+                      color={secondary.main}
                       sx={typography.body3}
                     >
                       {description}
