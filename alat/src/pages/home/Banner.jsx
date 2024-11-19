@@ -177,7 +177,32 @@ function BannerSlider() {
   });
   return (
     <>
-      <Box>
+      <Box
+        sx={{
+          ".slick-dots": {
+            bottom: "5px !important",
+            li: {
+              margin: "0 !important",
+              width: "15px !important",
+              "&.slick-active": {
+                button: {
+                  "&:before": {
+                    color: "#ffffff !important",
+                    opacity: 1,
+                  },
+                },
+              },
+              button: {
+                padding: "0 !important",
+                "&:before": {
+                  color: "rgba(255, 255, 255, 0.5) !important",
+                  fontSize: "10px !important",
+                },
+              },
+            },
+          },
+        }}
+      >
         <Slider {...sliderSettings}>
           <Box
             sx={{
