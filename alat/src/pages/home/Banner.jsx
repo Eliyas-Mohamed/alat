@@ -15,6 +15,7 @@ import banner2img5 from "../../assets/banner2/image5.png";
 import banner2bgImage from "../../assets/banner2/bg.png";
 import banner2Logo from "../../assets/banner2/alat-logo.png";
 
+import banner3 from "../../assets/banner3/banner3.png";
 import "./banner.scss";
 
 const banner2Content = [
@@ -68,7 +69,88 @@ const sliderSettings = {
   autoplaySpeed: 2000,
   fade: true,
 };
+
 function BannerSlider() {
+  const typography = {
+    h1: {
+      fontSize: 32,
+      fontWeight: 500,
+      marginBottom: "10px",
+      fontFamily: "Karbon-semibold",
+    },
+    h2: {
+      fontSize: 28,
+      fontWeight: 600,
+      marginBottom: "10px",
+      fontFamily: "karbon-semibold",
+    },
+    h3: {
+      fontSize: 20,
+      fontWeight: 500,
+      marginBottom: "20px",
+      fontFamily: "karbon-medium",
+    },
+    h4: {
+      fontSize: 18,
+      fontWeight: 500,
+      fontFamily: "karbon-medium",
+      marginBottom: "10px",
+    },
+    h5: {
+      fontSize: 15,
+      fontWeight: 500,
+      fontFamily: "karbon-bold",
+    },
+    h6: {
+      fontSize: 14,
+      fontWeight: 500,
+      marginBottom: "5px",
+      fontFamily: "karbon-semibold",
+    },
+    body1: {
+      fontWeight: 400,
+      fontSize: 20,
+      lineHeight: 1,
+      fontFamily: "karbon",
+      marginBottom: "5px",
+    },
+    body2: {
+      fontWeight: 400,
+      fontSize: 18,
+      lineHeight: 1,
+      fontFamily: "karbon",
+      marginBottom: 5,
+    },
+    body3: {
+      fontWeight: 400,
+      fontSize: 15,
+      lineHeight: 1,
+      fontFamily: "karbon",
+      marginBottom: "5px",
+    },
+    body4: {
+      fontWeight: 400,
+      fontSize: 16,
+      lineHeight: 1,
+      fontFamily: "karbon",
+      marginBottom: 5,
+    },
+    subtitle1: {
+      fontWeight: 500,
+      fontSize: 14,
+      fontFamily: "karbon-semibold",
+    },
+    subtitle2: {
+      fontWeight: 500,
+      fontSize: 13,
+      fontFamily: "karbon-semibold",
+    },
+    subtitle3: {
+      fontWeight: 600,
+      fontSize: 11,
+      fontFamily: "Inter",
+    },
+  };
   const isDesktop = useMediaQuery({
     query: "(min-width: 1224px)",
   });
@@ -76,104 +158,126 @@ function BannerSlider() {
     query: "(max-width: 767px)",
   });
   return (
-    <Box>
-      <Slider {...sliderSettings}>
-        <Box
-          sx={{
-            backgroundColor: "#02518C",
-            textAlign: "left",
-            borderRadius: "15px",
-            lineHeight: "21.2px",
-            minHeight: "240px",
-          }}
-        >
-          <Grid container alignItems={"center"}>
-            <Grid size={{ md: 12, lg: 8 }} padding={"20px"}>
-              <Box sx={{ maxWidth: "650px" }} height={"100%"}>
-                <img
-                  className="banner-logo-img"
-                  src={bannerLogo}
-                  alt="banner-logo"
-                />
-                <Typography variant="h1" color="secondary">
-                  Message from our CEO
-                </Typography>
-                <Typography
-                  variant="body1"
-                  color="secondary"
-                  sx={{ marginBottom: "10px" }}
-                >
-                  Welcome to Alat hub. We're excited to have you here. Discover
-                  how our innovative solutions help you solve a problem or
-                  achieve your goals.
-                </Typography>
-                <Link href="#" color="secondary" variant="subtitle1">
-                  Read more
-                </Link>
-              </Box>
-            </Grid>
-            <Grid size={{ md: 12, lg: 4 }}>
-              <Box position={"relative"}>
-                <img
-                  src={bannerImage}
-                  style={{
-                    width: "319px",
-                    height: "240px",
-                    objectFit: "cover",
-                  }}
-                />
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-        <Box
-          sx={{
-            backgroundImage: `url(${banner2bgImage})`,
-            position: "relative",
-            borderRadius: "15px",
-            minHeight: "240px",
-          }}
-          padding={2}
-        >
-          <div className="banner-overlay"></div>
-          <Stack
-            direction={isMobile ? "column" : "row"}
-            position={"relative"}
-            justifyContent={"space-between"}
-            minHeight={"205px"}
+    <>
+      <Box>
+        <Slider {...sliderSettings}>
+          <Box
+            sx={{
+              backgroundColor: "#02518C",
+              textAlign: "left",
+              borderRadius: "15px",
+              lineHeight: "21.2px",
+              minHeight: "240px",
+            }}
           >
-            <Stack direction={"column"} justifyContent={"space-between"}>
-              <img src={banner2Logo} style={{ width: "114px" }} alt="logo" />
-              <Typography variant="h3" mb={0} color="secondary">
-                TOMORROW <br /> MADE BETTER
-              </Typography>
-            </Stack>
-            <Stack direction={"row"} overflow={isMobile ? "scroll" : "unset"}>
-              {banner2Content.map(({ header, description, image }, index) => (
-                <Stack
-                  key={index}
-                  direction={"column"}
-                  padding={1}
-                  maxWidth={"210px"}
-                >
+            <Grid container alignItems={"center"}>
+              <Grid size={{ md: 12, lg: 8 }} padding={"20px"}>
+                <Box sx={{ maxWidth: "650px" }} height={"100%"}>
                   <img
-                    src={image}
-                    style={{ width: "50px", height: "50px" }}
-                    alt="logo"
+                    className="banner-logo-img"
+                    src={bannerLogo}
+                    alt="banner-logo"
                   />
-                  <Typography variant="h2" color="#09dac5">
-                    {header}
+                  <Typography variant="h1" sx={typography.h1} color="secondary">
+                    Message from our CEO
                   </Typography>
-                  <Typography variant="body3" color="secondary">
-                    {description}
+                  <Typography
+                    variant="body1"
+                    color="secondary"
+                    sx={typography.body1}
+                  >
+                    Welcome to Alat hub. We're excited to have you here.
+                    Discover how our innovative solutions help you solve a
+                    problem or achieve your goals.
                   </Typography>
-                </Stack>
-              ))}
+                  <Link
+                    href="#"
+                    color="secondary"
+                    variant="subtitle1"
+                    sx={typography.subtitle1}
+                  >
+                    Read more
+                  </Link>
+                </Box>
+              </Grid>
+              <Grid size={{ md: 12, lg: 4 }}>
+                <Box position={"relative"}>
+                  <img
+                    src={bannerImage}
+                    style={{
+                      width: "319px",
+                      height: "240px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+          <Box
+            sx={{
+              backgroundImage: `url(${banner2bgImage})`,
+              position: "relative",
+              borderRadius: "15px",
+              minHeight: "240px",
+            }}
+            padding={2}
+          >
+            <div className="banner-overlay"></div>
+            <Stack
+              direction={isMobile ? "column" : "row"}
+              position={"relative"}
+              justifyContent={"space-between"}
+              minHeight={"205px"}
+            >
+              <Stack direction={"column"} justifyContent={"space-between"}>
+                <img src={banner2Logo} style={{ width: "114px" }} alt="logo" />
+                <Typography
+                  variant="h3"
+                  color="secondary"
+                  sx={{ ...typography.h3, mb: 0 }}
+                >
+                  TOMORROW <br /> MADE BETTER
+                </Typography>
+              </Stack>
+              <Stack direction={"row"} overflow={isMobile ? "scroll" : "unset"}>
+                {banner2Content.map(({ header, description, image }, index) => (
+                  <Stack
+                    key={index}
+                    direction={"column"}
+                    padding={1}
+                    maxWidth={"210px"}
+                  >
+                    <img
+                      src={image}
+                      style={{ width: "50px", height: "50px" }}
+                      alt="logo"
+                    />
+                    <Typography
+                      variant="h2"
+                      color="#09dac5"
+                      sx={{ ...typography.h2, mb: 0 }}
+                    >
+                      {header}
+                    </Typography>
+                    <Typography
+                      variant="body3"
+                      color="secondary"
+                      sx={typography.body3}
+                    >
+                      {description}
+                    </Typography>
+                  </Stack>
+                ))}
+              </Stack>
             </Stack>
-          </Stack>
-        </Box>
-      </Slider>
-    </Box>
+          </Box>
+          <Box sx={{ width: "100%", maxHeight: "240px" }}>
+            <img src={banner3} alt="banner-img" width={"100%"} />
+          </Box>
+        </Slider>
+      </Box>
+    </>
   );
 }
 
